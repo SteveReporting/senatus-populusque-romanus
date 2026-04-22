@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG } from "@/config/trello";
 import { extractLinks, getCardImage } from "@/lib/trello";
