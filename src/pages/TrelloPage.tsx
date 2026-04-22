@@ -67,7 +67,7 @@ export const TrelloPage = ({ category = "all", eyebrow, title, subtitle, entityS
       )}
 
       <div className="space-y-16">
-        {sections.map(({ list, cards }) => (
+        {sections.map(({ list, cards, fallback }) => (
           <div key={list.id}>
             <div className="flex items-end justify-between mb-5">
               <h3 className="font-serif text-2xl text-gold">{list.name}</h3>
@@ -81,7 +81,7 @@ export const TrelloPage = ({ category = "all", eyebrow, title, subtitle, entityS
             ) : (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {cards.map((c) => (
-                  <EntityCard key={c.id} card={c} category={entitySlug} />
+                  <EntityCard key={c.id} card={c} category={entitySlug} fallbackImage={fallback} />
                 ))}
               </div>
             )}
