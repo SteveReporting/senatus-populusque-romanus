@@ -131,9 +131,7 @@ const Entity = () => {
             {img ? (
               <img src={img} alt={card.name} className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-imperial">
-                <ImageIcon className="h-16 w-16 text-gold/30" />
-              </div>
+              <PlaceholderSeal name={card.name} />
             )}
           </div>
           {card.attachments && card.attachments.length > 1 && (
