@@ -7,9 +7,9 @@
 
 export const TRELLO_CONFIG = {
   // Roman Information Management Mainframe (primary)
-  informationBoardId: "REPLACE_WITH_INFO_BOARD_ID",
+  informationBoardId: "CJhBZOI4",
   // Imperial Development Board (secondary)
-  developmentBoardId: "REPLACE_WITH_DEV_BOARD_ID",
+  developmentBoardId: "hSGwyRev",
   // Auto-refresh interval in ms
   refreshIntervalMs: 60_000,
 };
