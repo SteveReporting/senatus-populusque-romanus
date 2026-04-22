@@ -119,7 +119,7 @@ const Entity = () => {
 
   const img = getCardImage(card);
   const links = extractLinks(card.desc || "");
-  const cleanDesc = (card.desc || "").replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, "$1");
+  const desc = card.desc || "";
 
   return (
     <div className="container py-12">
