@@ -1,4 +1,5 @@
 import logo from "@/assets/sjc-logo.png";
+import SocialLinks from "./SocialLinks";
 
 export const Footer = () => (
   <footer className="mt-24 border-t border-border bg-surface-1/60">
@@ -14,8 +15,11 @@ export const Footer = () => (
       <div className="text-center text-xs text-muted-foreground tracking-widest uppercase">
         Roma Aeterna — Imperial Mainframe v1.0
       </div>
-      <div className="text-right text-xs text-muted-foreground">
-        Owner: <span className="text-gold-soft">SJC</span> · Roblox · SPQR
+      <div className="flex md:justify-end items-center gap-4">
+        <SocialLinks />
+        <div className="text-xs text-muted-foreground">
+          Owner: <span className="text-gold-soft">SJC</span>
+        </div>
       </div>
     </div>
   </footer>

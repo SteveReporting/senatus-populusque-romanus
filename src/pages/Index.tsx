@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Building2, Shield, Network, Cog, Scale, Search } from "lucide-react";
 import logo from "@/assets/sjc-logo.png";
+import SocialLinks from "@/components/SocialLinks";
 import SectionHeader from "@/components/SectionHeader";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG } from "@/config/trello";
@@ -82,6 +83,12 @@ const Index = () => {
                 >
                   <Scale className="h-4 w-4" /> Judicial System
                 </Link>
+              </div>
+              <div className="mt-6">
+                <div className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
+                  Join the Empire
+                </div>
+                <SocialLinks variant="labeled" />
               </div>
               <div className="mt-10 grid grid-cols-4 gap-4 max-w-lg">
                 {stats.map((s) => (
