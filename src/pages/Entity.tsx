@@ -160,9 +160,32 @@ const Entity = () => {
           <h1 className="font-serif text-5xl text-foreground leading-tight">{card.name}</h1>
           <div className="gold-divider my-6" />
 
-          {cleanDesc ? (
-            <div className="prose prose-invert max-w-none whitespace-pre-wrap text-muted-foreground leading-relaxed">
-              {cleanDesc}
+          {desc ? (
+            <div className="max-w-none text-muted-foreground leading-relaxed space-y-4
+              [&_h1]:font-serif [&_h1]:text-3xl [&_h1]:text-foreground [&_h1]:mt-6
+              [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-foreground [&_h2]:mt-6
+              [&_h3]:font-serif [&_h3]:text-xl [&_h3]:text-foreground [&_h3]:mt-4
+              [&_h4]:font-display [&_h4]:tracking-widest [&_h4]:uppercase [&_h4]:text-gold [&_h4]:text-sm [&_h4]:mt-4
+              [&_strong]:text-foreground [&_strong]:font-semibold
+              [&_em]:italic
+              [&_a]:text-gold [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-gold-soft
+              [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-1
+              [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-1
+              [&_blockquote]:border-l-2 [&_blockquote]:border-gold/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-foreground/80
+              [&_code]:bg-surface-2 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-gold-soft [&_code]:text-sm
+              [&_pre]:bg-surface-2 [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:overflow-x-auto
+              [&_hr]:border-gold/20 [&_hr]:my-6
+              [&_table]:w-full [&_th]:text-left [&_th]:text-foreground [&_th]:border-b [&_th]:border-border [&_th]:py-2 [&_td]:py-2 [&_td]:border-b [&_td]:border-border/50">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  a: ({ node, ...props }) => (
+                    <a {...props} target="_blank" rel="noreferrer" />
+                  ),
+                }}
+              >
+                {desc}
+              </ReactMarkdown>
             </div>
           ) : (
             <p className="text-muted-foreground italic">No dossier provided.</p>
