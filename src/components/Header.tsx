@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Search, Menu, X } from "lucide-react";
 import logo from "@/assets/sjc-logo.png";
+import SocialLinks from "./SocialLinks";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -69,6 +70,7 @@ export const Header = () => {
             <span>Search archives…</span>
             <kbd className="ml-2 text-[10px] px-1.5 py-0.5 rounded border border-border bg-background/60">/</kbd>
           </Link>
+          <SocialLinks className="hidden md:flex" />
           <button
             onClick={() => setOpen((o) => !o)}
             className="lg:hidden p-2 text-foreground"
