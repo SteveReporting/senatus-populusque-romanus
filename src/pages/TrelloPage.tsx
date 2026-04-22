@@ -4,7 +4,7 @@ import EntityCard from "@/components/EntityCard";
 import TrelloEmptyState from "@/components/TrelloEmptyState";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG, LIST_CATEGORY_HINTS } from "@/config/trello";
-import { cardsByList } from "@/lib/trello";
+import { cardsByList, buildListImageFallbacks } from "@/lib/trello";
 
 interface Props {
   category?: keyof typeof LIST_CATEGORY_HINTS | "all";
@@ -21,15 +21,22 @@ export const TrelloPage = ({ category = "all", eyebrow, title, subtitle, entityS
   const sections = useMemo(() => {
     if (!data) return [];
     const grouped = cardsByList(data);
+    const fallbacks = buildListImageFallbacks(data);
     const lists = data.lists.slice().sort((a, b) => a.pos - b.pos);
 
-    if (category === "all") {
-      return lists.map((l) => ({ list: l, cards: grouped.get(l.id) ?? [] }));
-    }
-    const hints = LIST_CATEGORY_HINTS[category] ?? [];
-    return lists
-      .filter((l) => hints.some((h) => l.name.toLowerCase().includes(h)))
-      .map((l) => ({ list: l, cards: grouped.get(l.id) ?? [] }));
+    const filtered =
+      category === "all"
+        ? lists
+        : lists.filter((l) =>
+            (LIST_CATEGORY_HINTS[category] ?? []).some((h) =>
+              l.name.toLowerCase().includes(h)
+            )
+          );
+    return filtered.map((l) => ({
+      list: l,
+      cards: grouped.get(l.id) ?? [],
+      fallback: fallbacks.get(l.id) ?? null,
+    }));
   }, [data, category]);
 
   return (
@@ -60,7 +67,7 @@ export const TrelloPage = ({ category = "all", eyebrow, title, subtitle, entityS
       )}
 
       <div className="space-y-16">
-        {sections.map(({ list, cards }) => (
+        {sections.map(({ list, cards, fallback }) => (
           <div key={list.id}>
             <div className="flex items-end justify-between mb-5">
               <h3 className="font-serif text-2xl text-gold">{list.name}</h3>
@@ -74,7 +81,7 @@ export const TrelloPage = ({ category = "all", eyebrow, title, subtitle, entityS
             ) : (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {cards.map((c) => (
-                  <EntityCard key={c.id} card={c} category={entitySlug} />
+                  <EntityCard key={c.id} card={c} category={entitySlug} fallbackImage={fallback} />
                 ))}
               </div>
             )}

@@ -8,10 +8,12 @@ interface Props {
   category?: string;
   variant?: "default" | "legion";
   className?: string;
+  /** Optional fallback image URL when the card itself has none. */
+  fallbackImage?: string | null;
 }
 
-export const EntityCard = ({ card, category = "entity", variant = "default", className }: Props) => {
-  const img = getCardImage(card);
+export const EntityCard = ({ card, category = "entity", variant = "default", className, fallbackImage }: Props) => {
+  const img = getCardImage(card) ?? fallbackImage ?? null;
   const isLegion = variant === "legion";
   return (
     <Link
