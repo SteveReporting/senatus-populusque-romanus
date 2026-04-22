@@ -2,95 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Roman Imperial Mainframe — Design System
+ * Deep navy/black surfaces, imperial gold accents, serif display.
+ * All colors HSL.
+ */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Imperial dark theme (default) */
+    --background: 222 45% 6%;
+    --foreground: 44 60% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 222 40% 9%;
+    --card-foreground: 44 50% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 222 45% 7%;
+    --popover-foreground: 44 50% 92%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Imperial gold */
+    --primary: 43 78% 56%;
+    --primary-foreground: 222 50% 6%;
+    --primary-glow: 45 95% 68%;
+    --primary-deep: 38 70% 38%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 222 35% 14%;
+    --secondary-foreground: 44 40% 88%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 222 30% 12%;
+    --muted-foreground: 220 15% 62%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 65% 38%;             /* Roman crimson */
+    --accent-foreground: 44 80% 92%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 48%;
+    --destructive-foreground: 44 60% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 222 30% 16%;
+    --input: 222 30% 14%;
+    --ring: 43 78% 56%;
 
-    --radius: 0.5rem;
+    --radius: 0.4rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Imperial extras */
+    --gold: 43 78% 56%;
+    --gold-soft: 43 60% 70%;
+    --gold-deep: 38 70% 38%;
+    --crimson: 0 65% 38%;
+    --crimson-deep: 0 70% 24%;
+    --surface-1: 222 42% 8%;
+    --surface-2: 222 38% 11%;
+    --surface-3: 222 34% 14%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --gradient-imperial: linear-gradient(135deg, hsl(222 50% 6%) 0%, hsl(222 45% 10%) 50%, hsl(0 50% 14%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(43 78% 56%) 0%, hsl(45 95% 68%) 50%, hsl(38 70% 42%) 100%);
+    --gradient-panel: linear-gradient(180deg, hsl(222 40% 10% / 0.95), hsl(222 42% 7% / 0.95));
+    --gradient-radial-gold: radial-gradient(circle at 50% 0%, hsl(43 78% 56% / 0.15), transparent 60%);
 
-    --sidebar-primary: 240 5.9% 10%;
+    --shadow-gold: 0 8px 40px -12px hsl(43 78% 56% / 0.45);
+    --shadow-imperial: 0 20px 60px -20px hsl(0 70% 24% / 0.6), 0 0 0 1px hsl(43 78% 56% / 0.15);
+    --shadow-panel: 0 12px 40px -8px hsl(222 60% 2% / 0.6);
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --transition-smooth: 350ms cubic-bezier(0.22, 1, 0.36, 1);
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 222 45% 6%;
+    --sidebar-foreground: 44 40% 88%;
+    --sidebar-primary: 43 78% 56%;
+    --sidebar-primary-foreground: 222 50% 6%;
+    --sidebar-accent: 222 35% 14%;
+    --sidebar-accent-foreground: 44 40% 88%;
+    --sidebar-border: 222 30% 16%;
+    --sidebar-ring: 43 78% 56%;
   }
 }
 
@@ -98,8 +79,100 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
-  body {
-    @apply bg-background text-foreground;
+  html {
+    color-scheme: dark;
   }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-image:
+      radial-gradient(ellipse at top, hsl(43 78% 56% / 0.06), transparent 60%),
+      radial-gradient(ellipse at bottom, hsl(0 65% 38% / 0.08), transparent 60%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Cormorant Garamond', 'Trajan Pro', Georgia, serif;
+    letter-spacing: 0.01em;
+  }
+  .font-display {
+    font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: 0.08em;
+  }
+}
+
+@layer components {
+  .imperial-panel {
+    background: var(--gradient-panel);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-panel);
+    position: relative;
+  }
+  .imperial-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, hsl(var(--gold) / 0.4), transparent 30%);
+    mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+    mask-composite: exclude;
+    padding: 1px;
+    border-radius: inherit;
+    opacity: 0.4;
+  }
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.7), transparent);
+  }
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+  .text-gold-soft {
+    color: hsl(var(--gold-soft));
+  }
+  .bg-gradient-gold {
+    background: var(--gradient-gold);
+  }
+  .meander {
+    --m: hsl(var(--gold) / 0.55);
+    background-image:
+      linear-gradient(90deg, var(--m) 50%, transparent 50%),
+      linear-gradient(90deg, transparent 50%, var(--m) 50%);
+    background-size: 16px 2px, 16px 2px;
+    background-position: 0 0, 0 100%;
+    background-repeat: repeat-x;
+  }
+  .scanline {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      hsl(var(--gold) / 0.03) 3px,
+      hsl(var(--gold) / 0.03) 4px
+    );
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out both;
+  }
+  .animate-pulse-gold {
+    animation: pulse-gold 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--gold) / 0.4); }
+  50% { box-shadow: 0 0 0 10px hsl(var(--gold) / 0); }
 }

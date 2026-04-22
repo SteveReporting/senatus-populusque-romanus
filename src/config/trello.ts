@@ -1,0 +1,25 @@
+// Trello board configuration.
+// Replace these IDs with the short IDs from your public Trello board URLs.
+// e.g. https://trello.com/b/ABC123XY/board-name  =>  boardId = "ABC123XY"
+//
+// Both boards MUST be set to "Public" in Trello (Show Menu → More → Settings → Visibility)
+// for the public JSON endpoint (https://trello.com/b/<id>.json) to work without auth.
+
+export const TRELLO_CONFIG = {
+  // Roman Information Management Mainframe (primary)
+  informationBoardId: "REPLACE_WITH_INFO_BOARD_ID",
+  // Imperial Development Board (secondary)
+  developmentBoardId: "REPLACE_WITH_DEV_BOARD_ID",
+  // Auto-refresh interval in ms
+  refreshIntervalMs: 60_000,
+};
+
+export const JUDICIAL_URL = "https://example.com/judicial"; // Replace with the real judicial database URL.
+
+// Heuristics for grouping lists across the information board.
+// Lowercased substring match against list names.
+export const LIST_CATEGORY_HINTS = {
+  military: ["legio", "legion", "military", "army", "auxilia", "navy", "praetoria"],
+  government: ["senate", "senat", "consul", "imperial", "government", "magistrat", "office", "council"],
+  departments: ["depart", "ministry", "organi", "agency", "bureau", "division"],
+};
