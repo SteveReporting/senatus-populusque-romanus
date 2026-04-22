@@ -1,9 +1,86 @@
 import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, ImageIcon } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG } from "@/config/trello";
 import { extractLinks, getCardImage } from "@/lib/trello";
+import pattern from "@/assets/roman-pattern.jpg";
+import crest from "@/assets/sjc-logo.png";
+
+function toRoman(num: number): string {
+  if (num <= 0) return "";
+  const map: [number, string][] = [
+    [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
+    [100, "C"], [90, "XC"], [50, "L"], [40, "XL"],
+    [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"],
+  ];
+  let n = num;
+  let out = "";
+  for (const [v, s] of map) {
+    while (n >= v) { out += s; n -= v; }
+  }
+  return out;
+}
+
+function shortHash(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+const PlaceholderSeal = ({ name }: { name: string }) => {
+  const initials = name
+    .replace(/[^A-Za-z\s]/g, "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? "")
+    .join("");
+  const numeral = toRoman((shortHash(name) % 39) + 1);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-[0.45]"
+        style={{
+          backgroundImage: `url(${pattern})`,
+          backgroundSize: "360px 360px",
+          backgroundRepeat: "repeat",
+        }}
+        aria-hidden
+      />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--background)/0.2),hsl(var(--background)/0.92))]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-crimson-deep/30 via-transparent to-gold/5" />
+      <div className="absolute inset-4 rounded-sm border border-gold/30" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+        <img
+          src={crest}
+          alt=""
+          aria-hidden
+          className="h-24 w-24 opacity-90 drop-shadow-[0_0_24px_hsl(var(--gold)/0.45)]"
+        />
+        <div className="mt-3 font-display text-gold text-sm tracking-[0.5em]">
+          {numeral}
+        </div>
+        {initials && (
+          <div className="font-serif text-5xl text-foreground/85 mt-1">
+            {initials}
+          </div>
+        )}
+      </div>
+      {["top-3 left-3", "top-3 right-3", "bottom-3 left-3", "bottom-3 right-3"].map((p) => (
+        <span key={p} className={`absolute ${p} h-4 w-4 border-gold/60`}
+          style={{
+            borderTopWidth: p.includes("top") ? 1 : 0,
+            borderBottomWidth: p.includes("bottom") ? 1 : 0,
+            borderLeftWidth: p.includes("left") ? 1 : 0,
+            borderRightWidth: p.includes("right") ? 1 : 0,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 const Entity = () => {
   const { category, id } = useParams();
@@ -54,9 +131,7 @@ const Entity = () => {
             {img ? (
               <img src={img} alt={card.name} className="absolute inset-0 w-full h-full object-cover" />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-imperial">
-                <ImageIcon className="h-16 w-16 text-gold/30" />
-              </div>
+              <PlaceholderSeal name={card.name} />
             )}
           </div>
           {card.attachments && card.attachments.length > 1 && (
