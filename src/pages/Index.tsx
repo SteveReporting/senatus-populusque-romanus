@@ -1,10 +1,37 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Building2, Shield, Network, Cog, Scale, Search } from "lucide-react";
+import { ArrowRight, Building2, Shield, Network, Cog, Scale, Search, FileText, Copy, ExternalLink, ScrollText } from "lucide-react";
 import logo from "@/assets/sjc-logo.png";
 import SocialLinks from "@/components/SocialLinks";
 import SectionHeader from "@/components/SectionHeader";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG } from "@/config/trello";
+
+const DOCUMENTS = [
+  {
+    title: "Codex I",
+    blurb: "Primary imperial codex — foundational doctrine.",
+    real: "https://docs.google.com/document/d/1d0sEh9Mu4Ngn-xbLJ4zeUQk5mpA9XzSQPEA6XPUjslo/edit?tab=t.0#heading=h.fk11p1q32u8n",
+    copy: "https://docs.google.com/document/d/1Utxtdbvhjfssks3gR9VrczcTgXNZu7qFMLxxltV3Slw/edit?tab=t.0#heading=h.en3sfxnqkl8r",
+  },
+  {
+    title: "Codex II",
+    blurb: "Secondary statutes and operational records.",
+    real: "https://docs.google.com/document/d/19h1otmYeh3KSO5NDUPKIkYXyn5_n9qiMgbjQya2QZjk/edit?tab=t.0#heading=h.383eo8dpsxb5",
+    copy: "https://docs.google.com/document/d/11et0BrtCWEbK5397hBwVzn1oLGZ1CLdWvchjGBKeasQ/edit?tab=t.0#heading=h.383eo8dpsxb5",
+  },
+  {
+    title: "Codex III",
+    blurb: "Decrees, edicts, and supplementary archives.",
+    real: "https://docs.google.com/document/d/1hDMX6ebApI8J4bgiKIj8J6YRujHRydj5h-thwy27IDM/edit?tab=t.0#heading=h.zfwgmmsufw50",
+    copy: "https://docs.google.com/document/d/1BvltycjBiu8DY_dD8trBnZVykjGjT7UKJyerQpKJK0k/edit?tab=t.0#heading=h.zfwgmmsufw50",
+  },
+  {
+    title: "Codex IV",
+    blurb: "Auxiliary records and appendices of the Empire.",
+    real: "https://docs.google.com/document/d/11PUcjRdIhxQjU6pmkuWuG5hYA8UJtu4MsC9UnzUY9ts/edit?tab=t.0",
+    copy: "https://docs.google.com/document/d/1Aa8kSUd1zuPteuq63Bkd4ZIJh6Xbp2AVMCWVHTZbywc/edit?tab=t.0",
+  },
+];
 
 const SECTIONS = [
   {
