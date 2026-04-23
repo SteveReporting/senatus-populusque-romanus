@@ -145,6 +145,9 @@ const Index = () => {
         <div className="meander h-1" />
       </section>
 
+      {/* ROTATING IMPERIAL QUOTES */}
+      <RotatingQuotes />
+
       {/* SECTIONS GRID */}
       <section className="container py-20">
         <SectionHeader
