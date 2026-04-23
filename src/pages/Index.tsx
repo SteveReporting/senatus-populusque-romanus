@@ -177,6 +177,59 @@ const Index = () => {
         </div>
       </section>
 
+      {/* IMPERIAL DOCUMENTS */}
+      <section className="container py-20">
+        <SectionHeader
+          eyebrow="Tabularium Imperii"
+          title="Imperial Documents"
+          subtitle="Official codices of the Roman state. Open the read-only authoritative document, or request a personal copy."
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {DOCUMENTS.map((d, i) => (
+            <div
+              key={d.title}
+              style={{ animationDelay: `${i * 80}ms` }}
+              className="imperial-panel rounded-md p-6 flex flex-col animate-fade-up hover:border-gold/50 transition-all duration-300"
+            >
+              <div className="flex items-start justify-between">
+                <div className="h-12 w-12 rounded-md border border-gold/40 bg-surface-2 flex items-center justify-center text-gold">
+                  <ScrollText className="h-5 w-5" />
+                </div>
+                <span className="font-display text-[10px] tracking-[0.3em] text-gold/60 uppercase">
+                  Sigillum
+                </span>
+              </div>
+              <h3 className="mt-5 font-serif text-2xl text-foreground">{d.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground flex-1">{d.blurb}</p>
+              <div className="mt-5 flex flex-col gap-2">
+                <a
+                  href={d.real}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-between gap-2 px-3 py-2 rounded-md bg-gradient-gold text-primary-foreground text-xs font-medium tracking-wide shadow-gold hover:shadow-imperial transition-all"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <FileText className="h-3.5 w-3.5" /> Open Document
+                  </span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+                <a
+                  href={d.copy}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-between gap-2 px-3 py-2 rounded-md border border-border text-muted-foreground text-xs hover:border-gold/40 hover:text-gold transition"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Copy className="h-3.5 w-3.5" /> Make a Copy
+                  </span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* JUDICIAL */}
       <section className="container py-20">
         <div className="imperial-panel rounded-lg overflow-hidden relative">
