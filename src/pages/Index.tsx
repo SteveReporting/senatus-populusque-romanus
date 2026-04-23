@@ -3,6 +3,7 @@ import { ArrowRight, Building2, Shield, Network, Cog, Scale, Search, FileText, C
 import logo from "@/assets/sjc-logo.png";
 import SocialLinks from "@/components/SocialLinks";
 import SectionHeader from "@/components/SectionHeader";
+import RotatingQuotes from "@/components/RotatingQuotes";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG } from "@/config/trello";
 
@@ -143,6 +144,9 @@ const Index = () => {
         </div>
         <div className="meander h-1" />
       </section>
+
+      {/* ROTATING IMPERIAL QUOTES */}
+      <RotatingQuotes />
 
       {/* SECTIONS GRID */}
       <section className="container py-20">
