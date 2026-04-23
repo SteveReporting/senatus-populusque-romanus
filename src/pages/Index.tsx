@@ -17,7 +17,6 @@ const DOCUMENTS = [
     title: "Codex II",
     blurb: "Secondary statutes and operational records.",
     real: "https://docs.google.com/document/d/19h1otmYeh3KSO5NDUPKIkYXyn5_n9qiMgbjQya2QZjk/edit?tab=t.0#heading=h.383eo8dpsxb5",
-    copy: "https://docs.google.com/document/d/11et0BrtCWEbK5397hBwVzn1oLGZ1CLdWvchjGBKeasQ/edit?tab=t.0#heading=h.383eo8dpsxb5",
   },
   {
     title: "Codex III",
@@ -29,9 +28,10 @@ const DOCUMENTS = [
     title: "Codex IV",
     blurb: "Auxiliary records and appendices of the Empire.",
     real: "https://docs.google.com/document/d/11PUcjRdIhxQjU6pmkuWuG5hYA8UJtu4MsC9UnzUY9ts/edit?tab=t.0",
-    copy: "https://docs.google.com/document/d/1Aa8kSUd1zuPteuq63Bkd4ZIJh6Xbp2AVMCWVHTZbywc/edit?tab=t.0",
   },
 ];
+
+type CodexDoc = (typeof DOCUMENTS)[number];
 
 const SECTIONS = [
   {
@@ -213,17 +213,19 @@ const Index = () => {
                   </span>
                   <ExternalLink className="h-3 w-3" />
                 </a>
-                <a
-                  href={d.copy}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-between gap-2 px-3 py-2 rounded-md border border-border text-muted-foreground text-xs hover:border-gold/40 hover:text-gold transition"
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <Copy className="h-3.5 w-3.5" /> Make a Copy
-                  </span>
-                  <ExternalLink className="h-3 w-3" />
-                </a>
+                {(d as CodexDoc).copy && (
+                  <a
+                    href={(d as CodexDoc).copy}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-between gap-2 px-3 py-2 rounded-md border border-border text-muted-foreground text-xs hover:border-gold/40 hover:text-gold transition"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Copy className="h-3.5 w-3.5" /> Make a Copy
+                    </span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
               </div>
             </div>
           ))}
