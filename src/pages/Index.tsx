@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Building2, Shield, Network, Cog, Scale, Search, FileText, Copy, ExternalLink, ScrollText } from "lucide-react";
+import { ArrowRight, Building2, Shield, Network, Cog, Scale, Search } from "lucide-react";
 import logo from "@/assets/sjc-logo.png";
 import SocialLinks from "@/components/SocialLinks";
 import SectionHeader from "@/components/SectionHeader";
@@ -7,34 +7,8 @@ import RotatingQuotes from "@/components/RotatingQuotes";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG } from "@/config/trello";
 
-const DOCUMENTS = [
-  {
-    title: "Codex I",
-    blurb: "Primary imperial codex — foundational doctrine.",
-    real: "https://docs.google.com/document/d/1d0sEh9Mu4Ngn-xbLJ4zeUQk5mpA9XzSQPEA6XPUjslo/edit?tab=t.0#heading=h.fk11p1q32u8n",
-    copy: "https://docs.google.com/document/d/1Utxtdbvhjfssks3gR9VrczcTgXNZu7qFMLxxltV3Slw/edit?tab=t.0#heading=h.en3sfxnqkl8r",
-  },
-  {
-    title: "Codex II",
-    blurb: "Secondary statutes and operational records.",
-    real: "https://docs.google.com/document/d/19h1otmYeh3KSO5NDUPKIkYXyn5_n9qiMgbjQya2QZjk/edit?tab=t.0#heading=h.383eo8dpsxb5",
-  },
-  {
-    title: "Codex III",
-    blurb: "Decrees, edicts, and supplementary archives.",
-    real: "https://docs.google.com/document/d/1hDMX6ebApI8J4bgiKIj8J6YRujHRydj5h-thwy27IDM/edit?tab=t.0#heading=h.zfwgmmsufw50",
-    copy: "https://docs.google.com/document/d/1BvltycjBiu8DY_dD8trBnZVykjGjT7UKJyerQpKJK0k/edit?tab=t.0#heading=h.zfwgmmsufw50",
-  },
-  {
-    title: "Codex IV",
-    blurb: "Auxiliary records and appendices of the Empire.",
-    real: "https://docs.google.com/document/d/11PUcjRdIhxQjU6pmkuWuG5hYA8UJtu4MsC9UnzUY9ts/edit?tab=t.0",
-  },
-];
-
-type CodexDoc = (typeof DOCUMENTS)[number];
-
 const SECTIONS = [
+
   {
     icon: Building2,
     title: "Government",
@@ -181,60 +155,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* IMPERIAL DOCUMENTS */}
-      <section className="container py-20">
-        <SectionHeader
-          eyebrow="Tabularium Imperii"
-          title="Imperial Documents"
-          subtitle="Official codices of the Roman state. Open the read-only authoritative document, or request a personal copy."
-        />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {DOCUMENTS.map((d, i) => (
-            <div
-              key={d.title}
-              style={{ animationDelay: `${i * 80}ms` }}
-              className="imperial-panel rounded-md p-6 flex flex-col animate-fade-up hover:border-gold/50 transition-all duration-300"
-            >
-              <div className="flex items-start justify-between">
-                <div className="h-12 w-12 rounded-md border border-gold/40 bg-surface-2 flex items-center justify-center text-gold">
-                  <ScrollText className="h-5 w-5" />
-                </div>
-                <span className="font-display text-[10px] tracking-[0.3em] text-gold/60 uppercase">
-                  Sigillum
-                </span>
-              </div>
-              <h3 className="mt-5 font-serif text-2xl text-foreground">{d.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground flex-1">{d.blurb}</p>
-              <div className="mt-5 flex flex-col gap-2">
-                <a
-                  href={d.real}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-between gap-2 px-3 py-2 rounded-md bg-gradient-gold text-primary-foreground text-xs font-medium tracking-wide shadow-gold hover:shadow-imperial transition-all"
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <FileText className="h-3.5 w-3.5" /> Open Document
-                  </span>
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-                {(d as CodexDoc).copy && (
-                  <a
-                    href={(d as CodexDoc).copy}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-between gap-2 px-3 py-2 rounded-md border border-border text-muted-foreground text-xs hover:border-gold/40 hover:text-gold transition"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <Copy className="h-3.5 w-3.5" /> Make a Copy
-                    </span>
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* JUDICIAL */}
       <section className="container py-20">
