@@ -1,41 +1,86 @@
-# Roman Imperial Mainframe
+# SPQR Development Showcase
 
-A full-stack-style front-end command and information portal built for a large Roblox Roman Empire roleplay project. The application brings government, military, development, departmental and judicial information into one searchable interface instead of spreading operational information across multiple external boards and documents.
+A combined Roblox/Luau and web-development showcase built around a large Roman Empire roleplay project. The repository demonstrates both the **player-facing gameplay systems** used in Roblox Studio and the **React/TypeScript information portal** used to organise the wider project.
 
-## What it demonstrates
+## Start here
 
-- Designing a structured information system around a real community/project workflow
+### Roblox gameplay engineering
+➡️ **[`roblox/`](./roblox/README.md)**
+
+Portfolio extracts include:
+
+- server-authoritative sword and shield combat
+- slash, stab and kick actions
+- directional blocking and shield stamina
+- guard break and stun states
+- ViewportFrame inventory/equipment rendering
+- validated equip/unequip networking
+- reusable player status/state service
+- name-tag selection with server authorization
+- custom TextChatService role presentation
+- state-aware sprint/movement controller
+
+### Web / project systems
+The root application is the **Roman Imperial Mainframe**, a React/TypeScript portal that brings government, military, development, departmental and judicial information into one searchable interface.
+
+## What this project demonstrates
+
+### Roblox / Luau
+- client/server architecture
+- RemoteEvents and RemoteFunctions
+- server-side action validation
+- gameplay state management
+- combat geometry and guard-direction checks
+- cooldown, stamina and stun systems
+- 3D ViewportFrame UI rendering
+- equipment synchronization
+- TextChatService customization
+- input and movement controllers
+
+### Web engineering
 - React and TypeScript application architecture
-- Client-side routing across multiple functional areas
-- Live Trello data integration with automatic refresh
-- Search and entity-based navigation
-- Reusable UI components and responsive layouts
-- Query caching/state management with TanStack Query
-- Data-driven presentation of government, military and development records
+- client-side routing
+- live Trello data integration
+- TanStack Query state/caching
+- reusable UI components
+- responsive layouts
+- search and entity-based navigation
 
-## Main features
+## Roblox structure
+
+```text
+roblox/
+├── src/
+│   ├── client/
+│   │   ├── CombatController.client.lua
+│   │   ├── CustomChatController.client.lua
+│   │   ├── InventoryController.client.lua
+│   │   ├── MovementController.client.lua
+│   │   └── NameTagSelector.client.lua
+│   ├── server/
+│   │   ├── CombatService.server.lua
+│   │   ├── EquipmentService.server.lua
+│   │   └── NameTagService.server.lua
+│   └── shared/
+│       ├── CombatConfig.lua
+│       └── StatusService.lua
+└── default.project.json
+```
+
+The gameplay samples follow a **client intent / server authority** model: input, UI and presentation happen locally, while state changes that affect other players are validated on the server.
+
+## Mainframe features
 
 ### Central command dashboard
-The landing page provides a single entry point into government, military, departments, development and judicial records, together with live board statistics.
+A single entry point into government, military, departments, development and judicial records with live board statistics.
 
 ### Live Trello integration
-Public Trello boards are treated as the underlying data source. The application retrieves board data and refreshes it automatically so information can be maintained outside the website without rebuilding the front end.
+Public Trello boards act as external data sources and refresh automatically, allowing information to be maintained without rebuilding the front end.
 
-### Structured navigation
-Dedicated routes separate major areas of the project:
+### Structured navigation and search
+Dedicated routes cover government, military, departments, development, judicial records, archive search and individual entity pages.
 
-- Government
-- Military
-- Departments
-- Development
-- Judicial records
-- Global archive search
-- Individual entity pages
-
-### Searchable records
-Users can move from broad categories into individual records through dynamic entity routes, making the application behave more like an internal information system than a static website.
-
-## Tech stack
+## Web tech stack
 
 - React 18
 - TypeScript
@@ -47,35 +92,24 @@ Users can move from broad categories into individual records through dynamic ent
 - Vitest
 - Trello public JSON data
 
-## Project structure
-
-```text
-src/
-├── components/     Reusable interface components
-├── config/         External data-source configuration
-├── hooks/          Data-fetching and application hooks
-├── pages/          Main application routes
-└── App.tsx         Routing and application composition
-```
-
-## Running locally
+## Running the web application
 
 ```bash
 npm install
 npm run dev
 ```
 
-For a production build:
+Production build:
 
 ```bash
 npm run build
 npm run preview
 ```
 
+## Reviewing the Roblox code
+
+The `roblox/default.project.json` file provides a Rojo-style mapping for the portfolio extracts. The samples are intentionally separated from private game assets, production map content and live project data so the engineering can be reviewed without exposing the complete experience.
+
 ## Why I built it
 
-The project was created to solve an organisational problem in a large Roblox roleplay project: operational information existed across multiple systems and needed a central, easier-to-navigate interface. The result is a themed management portal that combines external live data with a custom React front end.
-
-## Portfolio note
-
-This repository focuses on the web/application side of the wider Roblox project. Separate Roblox/Luau repositories are used for gameplay systems so individual systems such as combat, equipment and server-side services can be reviewed independently.
+The wider project needed both gameplay systems inside Roblox and a central way to organise operational information outside the game. Building both sides created a useful opportunity to work across gameplay engineering, UI, networking, state management, APIs and web application structure.
