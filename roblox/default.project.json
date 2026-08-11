@@ -1,0 +1,23 @@
+{
+  "name": "SPQRGameplaySystems",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Shared": {
+        "$path": "src/shared"
+      }
+    },
+    "ServerScriptService": {
+      "Systems": {
+        "$path": "src/server"
+      }
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Controllers": {
+          "$path": "src/client"
+        }
+      }
+    }
+  }
+}
