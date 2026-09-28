@@ -30,7 +30,7 @@ export const SocialLinks = ({ className, size = "sm", variant = "icon" }: Props)
           href={SOCIAL_LINKS.roblox}
           target="_blank"
           rel="noreferrer noopener"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-surface-2/60 text-foreground hover:text-gold hover:border-gold/50 transition text-sm"
+          className="inline-flex items-center gap-2 px-4 py-2 border border-border bg-card text-foreground hover:text-gold hover:border-gold/50 transition text-sm"
         >
           <RobloxIcon className={icon} /> Roblox Group
         </a>
@@ -38,7 +38,7 @@ export const SocialLinks = ({ className, size = "sm", variant = "icon" }: Props)
           href={SOCIAL_LINKS.discord}
           target="_blank"
           rel="noreferrer noopener"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-surface-2/60 text-foreground hover:text-gold hover:border-gold/50 transition text-sm"
+          className="inline-flex items-center gap-2 px-4 py-2 border border-border bg-card text-foreground hover:text-gold hover:border-gold/50 transition text-sm"
         >
           <DiscordIcon className={icon} /> Discord
         </a>
@@ -55,7 +55,7 @@ export const SocialLinks = ({ className, size = "sm", variant = "icon" }: Props)
         aria-label="Roblox Group"
         title="SPQR Roblox Group"
         className={cn(
-          "inline-flex items-center justify-center rounded-md border border-border bg-surface-2/60 text-muted-foreground hover:text-gold hover:border-gold/50 transition",
+          "inline-flex items-center justify-center border border-border bg-card text-muted-foreground hover:text-gold hover:border-gold/50 transition",
           dim
         )}
       >
@@ -68,7 +68,7 @@ export const SocialLinks = ({ className, size = "sm", variant = "icon" }: Props)
         aria-label="Discord"
         title="SPQR Discord"
         className={cn(
-          "inline-flex items-center justify-center rounded-md border border-border bg-surface-2/60 text-muted-foreground hover:text-gold hover:border-gold/50 transition",
+          "inline-flex items-center justify-center border border-border bg-card text-muted-foreground hover:text-gold hover:border-gold/50 transition",
           dim
         )}
       >

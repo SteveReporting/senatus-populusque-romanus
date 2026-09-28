@@ -14,7 +14,7 @@ export default {
       fontFamily: {
         serif: ["'Cormorant Garamond'", "Georgia", "serif"],
         display: ["'Cinzel'", "'Cormorant Garamond'", "Georgia", "serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Karla", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

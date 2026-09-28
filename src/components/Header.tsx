@@ -1,6 +1,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Search, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import logo from "@/assets/sjc-logo.png";
 import SocialLinks from "./SocialLinks";
 import { cn } from "@/lib/utils";
@@ -19,18 +20,23 @@ export const Header = () => {
   const loc = useLocation();
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/80 border-b border-border">
-      <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-      <div className="container flex items-center justify-between h-20">
+    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
+      <div className="container">
+        <div className="hidden md:flex h-7 items-center justify-between border-b border-border/70 text-[9px] uppercase tracking-[0.3em] text-muted-foreground">
+          <span>Senatus Populusque Romanus</span>
+          <span>Roman Information Management Mainframe</span>
+          <span className="text-gold">Systema Operativum</span>
+        </div>
+        <div className="flex items-center justify-between h-[72px]">
         <Link to="/" className="flex items-center gap-3 group">
           <img
             src={logo}
             alt="SPQR — Senatus Populusque Romanus crest"
-            className="h-12 w-12 drop-shadow-[0_0_12px_hsl(var(--gold)/0.35)] transition-transform group-hover:scale-105"
+            className="h-11 w-11 transition-transform duration-300 group-hover:scale-105"
           />
           <div className="hidden sm:block">
-            <div className="font-display text-gold text-sm tracking-[0.3em] leading-tight">SPQR</div>
-            <div className="font-serif text-foreground text-base leading-tight">Imperial Mainframe</div>
+            <div className="font-display text-gold text-xs tracking-[0.28em] leading-tight">SPQR</div>
+            <div className="font-serif text-foreground text-base leading-tight">Imperial Gazette</div>
           </div>
         </Link>
 
@@ -42,7 +48,7 @@ export const Header = () => {
               end={n.to === "/"}
               className={({ isActive }) =>
                 cn(
-                  "px-4 py-2 text-sm font-medium tracking-wide transition-colors relative",
+                   "px-3 py-2 text-[11px] uppercase tracking-[0.12em] transition-colors relative",
                   isActive
                     ? "text-gold"
                     : "text-muted-foreground hover:text-foreground"
@@ -53,7 +59,7 @@ export const Header = () => {
                 <>
                   {n.label}
                   {isActive && (
-                    <span className="absolute left-3 right-3 -bottom-0.5 h-px bg-gold" />
+                     <span className="absolute left-3 right-3 -bottom-1 h-0.5 bg-crimson" />
                   )}
                 </>
               )}
@@ -64,20 +70,23 @@ export const Header = () => {
         <div className="flex items-center gap-2">
           <Link
             to="/search"
-            className="hidden md:flex items-center gap-2 px-3 py-2 rounded-md border border-border bg-surface-2/60 text-muted-foreground hover:text-gold hover:border-gold/50 transition-colors text-sm"
+            className="hidden md:flex items-center gap-2 px-3 py-2 border border-border bg-card text-muted-foreground hover:text-gold hover:border-gold/50 transition-colors text-xs"
           >
             <Search className="h-4 w-4" />
             <span>Search archives…</span>
             <kbd className="ml-2 text-[10px] px-1.5 py-0.5 rounded border border-border bg-background/60">/</kbd>
           </Link>
           <SocialLinks className="hidden md:flex" />
-          <button
+           <Button
+             variant="ghost"
+             size="icon"
             onClick={() => setOpen((o) => !o)}
-            className="lg:hidden p-2 text-foreground"
+             className="lg:hidden text-foreground"
             aria-label="Toggle menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+           </Button>
+        </div>
         </div>
       </div>
 
@@ -110,7 +119,7 @@ export const Header = () => {
           </div>
         </div>
       )}
-      {loc.pathname === "/" && <div className="meander h-1" />}
+      {loc.pathname === "/" && <div className="h-0.5 bg-crimson" />}
     </header>
   );
 };
