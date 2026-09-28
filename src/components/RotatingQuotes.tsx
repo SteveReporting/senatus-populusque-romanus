@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Quote } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const QUOTES: { text: string; source: string }[] = [
   {
@@ -81,27 +82,27 @@ const RotatingQuotes = () => {
   const current = QUOTES[index];
 
   return (
-    <section className="container py-20">
-      <div className="relative imperial-panel rounded-lg overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-radial-gold opacity-40 pointer-events-none" />
-        <div className="absolute inset-0 scanline opacity-20 pointer-events-none" />
-        <div className="relative px-6 py-16 md:px-16 md:py-24 text-center">
-          <div className="flex items-center justify-center gap-3 text-[11px] tracking-[0.4em] uppercase text-gold/80 mb-8">
+    <section className="container py-16 md:py-24">
+      <div className="relative border-y-4 border-crimson bg-card overflow-hidden">
+        <div className="relative grid gap-8 px-6 py-12 md:grid-cols-[190px_1fr] md:px-12 md:py-16">
+          <div className="border-b border-border pb-6 md:border-b-0 md:border-r md:pb-0 md:pr-8">
+          <div className="flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase text-gold mb-4">
             <span className="h-px w-10 bg-gold/60" />
             <Quote className="h-4 w-4" />
             Vox Imperii
-            <span className="h-px w-10 bg-gold/60" />
+          </div>
+          <p className="font-serif text-3xl leading-none">From the laws of Rome</p>
           </div>
 
           <div
-            className="min-h-[180px] md:min-h-[160px] flex flex-col items-center justify-center transition-all duration-700 ease-out"
+            className="min-h-[190px] flex flex-col items-start justify-center transition-all duration-700 ease-out"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(8px)",
             }}
             aria-live="polite"
           >
-            <blockquote className="font-serif text-2xl md:text-4xl leading-snug text-foreground max-w-3xl">
+            <blockquote className="font-serif text-3xl md:text-5xl leading-tight text-foreground max-w-4xl">
               <span className="text-gold/70 font-display">“</span>
               {current.text}
               <span className="text-gold/70 font-display">”</span>
@@ -111,10 +112,11 @@ const RotatingQuotes = () => {
             </div>
           </div>
 
-          <div className="mt-10 flex items-center justify-center gap-2">
+           <div className="mt-8 flex items-center gap-1">
             {QUOTES.map((_, i) => (
-              <button
+               <Button
                 key={i}
+                 variant="ghost"
                 aria-label={`Show quote ${i + 1}`}
                 onClick={() => {
                   if (i === index) return;
@@ -124,14 +126,13 @@ const RotatingQuotes = () => {
                     setVisible(true);
                   }, 350);
                 }}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === index ? "w-8 bg-gold" : "w-1.5 bg-gold/30 hover:bg-gold/60"
+                 className={`h-5 min-w-0 p-0 transition-all duration-300 ${
+                   i === index ? "w-8 bg-crimson hover:bg-crimson" : "w-2 bg-gold/25 hover:bg-gold/60"
                 }`}
-              />
+               />
             ))}
           </div>
         </div>
-        <div className="meander h-1" />
       </div>
     </section>
   );
