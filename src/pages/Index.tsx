@@ -74,7 +74,7 @@ const Index = () => {
                 <SocialLinks variant="labeled" size="md" />
               </div>
               <div className="mt-5 flex flex-wrap gap-3">
-                <Button asChild variant="outline" size="lg" className="border-laurel rounded-md bg-transparent">
+                <Button asChild variant="outline" size="lg" className="border-gold/60 rounded-md bg-transparent">
                   <Link to="/government"><BookOpen /> Explore the archives</Link>
                 </Button>
                 <Button asChild variant="ghost" size="lg" className="text-crimson hover:bg-crimson/10 hover:text-crimson">
