@@ -20,12 +20,12 @@ export const Header = () => {
   const loc = useLocation();
 
   return (
-    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
+    <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-md border-b border-border shadow-panel">
       <div className="container">
         <div className="hidden md:flex h-7 items-center justify-between border-b border-border/70 text-[9px] uppercase tracking-[0.3em] text-muted-foreground">
           <span>Senatus Populusque Romanus</span>
-          <span>Roman Information Management Mainframe</span>
-          <span className="text-gold">Systema Operativum</span>
+          <span>Official Roblox Roman Community</span>
+          <span className="text-gold">Roma Aeterna</span>
         </div>
         <div className="flex items-center justify-between h-[72px]">
         <Link to="/" className="flex items-center gap-3 group">
@@ -36,7 +36,7 @@ export const Header = () => {
           />
           <div className="hidden sm:block">
             <div className="font-display text-gold text-xs tracking-[0.28em] leading-tight">SPQR</div>
-            <div className="font-serif text-foreground text-base leading-tight">Imperial Gazette</div>
+            <div className="font-serif text-foreground text-base leading-tight">Roman Community</div>
           </div>
         </Link>
 
@@ -119,7 +119,7 @@ export const Header = () => {
           </div>
         </div>
       )}
-      {loc.pathname === "/" && <div className="h-0.5 bg-crimson" />}
+      {loc.pathname === "/" && <div className="h-0.5 bg-gold" />}
     </header>
   );
 };

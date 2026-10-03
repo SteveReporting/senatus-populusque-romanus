@@ -83,7 +83,7 @@ const RotatingQuotes = () => {
 
   return (
     <section className="container py-16 md:py-24">
-      <div className="relative border-y-4 border-crimson bg-card overflow-hidden">
+      <div className="relative border-y-4 border-gold bg-card overflow-hidden shadow-panel">
         <div className="relative grid gap-8 px-6 py-12 md:grid-cols-[190px_1fr] md:px-12 md:py-16">
           <div className="border-b border-border pb-6 md:border-b-0 md:border-r md:pb-0 md:pr-8">
           <div className="flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase text-gold mb-4">
