@@ -9,69 +9,69 @@
 
 @layer base {
   :root {
-    /* Imperial editorial theme */
-    --background: 30 10% 4%;
-    --foreground: 43 30% 91%;
+    /* Sunlit Roman civic theme */
+    --background: 42 29% 93%;
+    --foreground: 145 22% 18%;
 
-    --card: 25 9% 7%;
-    --card-foreground: 44 50% 92%;
+    --card: 42 36% 97%;
+    --card-foreground: 145 22% 18%;
 
-    --popover: 25 10% 6%;
-    --popover-foreground: 44 50% 92%;
+    --popover: 42 36% 97%;
+    --popover-foreground: 145 22% 18%;
 
     /* Imperial gold */
-    --primary: 43 66% 52%;
-    --primary-foreground: 25 10% 5%;
-    --primary-glow: 45 95% 68%;
-    --primary-deep: 38 70% 38%;
+    --primary: 42 49% 46%;
+    --primary-foreground: 42 36% 98%;
+    --primary-glow: 43 56% 62%;
+    --primary-deep: 40 52% 34%;
 
-    --secondary: 25 9% 12%;
-    --secondary-foreground: 44 40% 88%;
+    --secondary: 42 22% 88%;
+    --secondary-foreground: 145 22% 18%;
 
-    --muted: 25 8% 11%;
-    --muted-foreground: 38 9% 61%;
+    --muted: 42 18% 88%;
+    --muted-foreground: 145 8% 40%;
 
-    --accent: 357 67% 35%;
-    --accent-foreground: 44 80% 92%;
+    --accent: 0 49% 38%;
+    --accent-foreground: 42 36% 98%;
 
     --destructive: 0 75% 48%;
-    --destructive-foreground: 44 60% 95%;
+    --destructive-foreground: 42 36% 98%;
 
-    --border: 40 16% 20%;
-    --input: 25 9% 14%;
-    --ring: 43 78% 56%;
+    --border: 40 20% 77%;
+    --input: 40 20% 82%;
+    --ring: 42 49% 46%;
 
     --radius: 0.4rem;
 
     /* Imperial extras */
-    --gold: 43 78% 56%;
-    --gold-soft: 43 60% 70%;
-    --gold-deep: 38 70% 38%;
-    --crimson: 357 67% 35%;
-    --crimson-deep: 357 70% 22%;
-    --surface-1: 25 10% 5%;
-    --surface-2: 25 9% 8%;
-    --surface-3: 25 8% 12%;
+    --gold: 42 49% 46%;
+    --gold-soft: 42 39% 57%;
+    --gold-deep: 40 52% 34%;
+    --crimson: 0 49% 38%;
+    --crimson-deep: 0 53% 29%;
+    --surface-1: 42 29% 93%;
+    --surface-2: 42 32% 96%;
+    --surface-3: 42 18% 88%;
 
-    --gradient-imperial: linear-gradient(135deg, hsl(30 10% 4%) 0%, hsl(25 9% 8%) 58%, hsl(357 45% 12%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(43 78% 56%) 0%, hsl(45 95% 68%) 50%, hsl(38 70% 42%) 100%);
-    --gradient-panel: linear-gradient(180deg, hsl(25 9% 9% / 0.98), hsl(30 10% 5% / 0.98));
-    --gradient-radial-gold: radial-gradient(circle at 50% 0%, hsl(43 78% 56% / 0.15), transparent 60%);
+    --gradient-imperial: linear-gradient(135deg, hsl(42 36% 97%) 0%, hsl(42 29% 93%) 58%, hsl(138 17% 87%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(42 49% 46%) 0%, hsl(43 56% 62%) 50%, hsl(40 52% 34%) 100%);
+    --gradient-panel: linear-gradient(180deg, hsl(42 36% 98%), hsl(42 28% 94%));
+    --gradient-radial-gold: radial-gradient(circle at 50% 0%, hsl(42 49% 46% / 0.12), transparent 60%);
 
-    --shadow-gold: 0 8px 40px -12px hsl(43 78% 56% / 0.45);
-    --shadow-imperial: 0 20px 60px -20px hsl(0 70% 24% / 0.6), 0 0 0 1px hsl(43 78% 56% / 0.15);
-    --shadow-panel: 0 12px 40px -8px hsl(30 30% 1% / 0.7);
+    --shadow-gold: 0 12px 32px -16px hsl(42 49% 30% / 0.35);
+    --shadow-imperial: 0 24px 60px -28px hsl(145 22% 18% / 0.3), 0 0 0 1px hsl(42 49% 46% / 0.14);
+    --shadow-panel: 0 18px 45px -28px hsl(145 22% 18% / 0.28);
 
     --transition-smooth: 350ms cubic-bezier(0.22, 1, 0.36, 1);
 
-    --sidebar-background: 30 10% 4%;
-    --sidebar-foreground: 44 40% 88%;
-    --sidebar-primary: 43 78% 56%;
-    --sidebar-primary-foreground: 25 10% 5%;
-    --sidebar-accent: 25 9% 12%;
-    --sidebar-accent-foreground: 44 40% 88%;
-    --sidebar-border: 40 16% 20%;
-    --sidebar-ring: 43 78% 56%;
+    --sidebar-background: 42 29% 93%;
+    --sidebar-foreground: 145 22% 18%;
+    --sidebar-primary: 42 49% 46%;
+    --sidebar-primary-foreground: 42 36% 98%;
+    --sidebar-accent: 42 22% 88%;
+    --sidebar-accent-foreground: 145 22% 18%;
+    --sidebar-border: 40 20% 77%;
+    --sidebar-ring: 42 49% 46%;
   }
 }
 
@@ -80,13 +80,15 @@
     @apply border-border;
   }
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Karla', system-ui, sans-serif;
-    background-image: linear-gradient(hsl(var(--foreground) / 0.018) 1px, transparent 1px);
-    background-size: 100% 4px;
+    background-image:
+      linear-gradient(120deg, hsl(var(--gold) / 0.035) 1px, transparent 1px),
+      linear-gradient(30deg, hsl(var(--foreground) / 0.018) 1px, transparent 1px);
+    background-size: 42px 42px, 56px 56px;
     background-attachment: fixed;
   }
   h1, h2, h3, h4, .font-serif {

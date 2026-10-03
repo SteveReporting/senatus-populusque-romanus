@@ -2,7 +2,7 @@ import logo from "@/assets/sjc-logo.png";
 import SocialLinks from "./SocialLinks";
 
 export const Footer = () => (
-  <footer className="mt-24 border-t-4 border-crimson bg-card">
+  <footer className="mt-24 border-t-4 border-gold bg-card">
     <div className="container py-10 grid gap-8 md:grid-cols-3 items-center border-b border-border">
       <div className="flex items-center gap-3">
         <img src={logo} alt="SPQR crest" className="h-10 w-10" />
@@ -12,7 +12,7 @@ export const Footer = () => (
         </div>
       </div>
       <div className="text-center text-xs text-muted-foreground tracking-widest uppercase">
-        Official archive · refreshed every LX seconds
+        Roblox community · Discord · living archives
       </div>
       <div className="flex md:justify-end items-center gap-4">
         <SocialLinks />

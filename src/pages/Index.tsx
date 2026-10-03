@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Building2, Shield, Network, Cog, Scale, Search, Activity, Landmark } from "lucide-react";
+import { ArrowRight, Building2, Shield, Network, Cog, Scale, Search, Activity, Landmark, Users, BookOpen } from "lucide-react";
 import logo from "@/assets/sjc-logo.png";
 import SocialLinks from "@/components/SocialLinks";
 import SectionHeader from "@/components/SectionHeader";
@@ -53,88 +53,64 @@ const Index = () => {
 
   return (
     <>
-      <section className="container py-8 md:py-12">
-        <div className="border-y-4 border-crimson py-5">
-          <div className="flex items-center justify-between border-b border-border pb-3 text-[9px] uppercase tracking-[0.28em] text-muted-foreground">
-            <span>Official State Archive</span>
-            <span className="hidden sm:block">Roma · Senatus · Populus</span>
-            <span className="text-gold">Live Records</span>
-          </div>
-
-          <div className="py-8 text-center md:py-10">
-            <div className="mb-4 text-[10px] uppercase tracking-[0.35em] text-gold">Senatus Populusque Romanus</div>
-            <h1 className="font-display text-5xl font-bold uppercase leading-[0.9] text-foreground sm:text-7xl lg:text-8xl">
-              Roman Imperial
-              <span className="mt-2 block text-crimson">Mainframe</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl font-serif text-xl italic leading-snug text-muted-foreground md:text-2xl">
-              The official intelligence archive of Rome—uniting its government, legions, civil offices, and development record.
-            </p>
-          </div>
-
-          <div className="grid gap-0 border-t border-border lg:grid-cols-12">
-            <aside className="py-8 lg:col-span-3 lg:border-r lg:border-border lg:pr-8">
-              <div className="flex items-center gap-2 border-b-2 border-crimson pb-2 font-display text-xs uppercase text-gold">
-                <Activity className="h-4 w-4" /> Mainframe status
+      <section className="container py-8 md:py-14">
+        <div className="overflow-hidden rounded-lg border border-border bg-card shadow-imperial">
+          <div className="grid items-stretch lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="flex flex-col justify-center p-8 md:p-14 lg:p-16">
+              <div className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-crimson">
+                <span className="h-0.5 w-9 bg-crimson" /> Senate and People of Rome
               </div>
-              <div className="divide-y divide-border">
-                {stats.map((s) => (
-                  <div key={s.label} className="flex items-end justify-between py-4">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{s.label}</span>
-                    <span className="font-serif text-3xl leading-none text-foreground">{s.value}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 border-l-2 border-gold bg-secondary p-4 text-sm leading-relaxed text-muted-foreground">
-                Records are synchronized directly from the Roman Information Management Mainframe.
-              </div>
-            </aside>
-
-            <div className="border-y border-border py-8 lg:col-span-6 lg:border-y-0 lg:px-8">
-              <div className="relative mx-auto aspect-square max-w-[520px] overflow-hidden bg-card">
-                <div className="absolute inset-4 border border-gold/30" />
-                <div className="absolute inset-8 border border-crimson/50" />
-                <img
-                  src={logo}
-                  alt="Senatus Populusque Romanus golden eagle crest"
-                  className="relative h-full w-full object-contain p-10 transition-transform duration-700 hover:scale-[1.03]"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-background/90 px-6 py-4 text-center">
-                  <div className="font-display text-xs uppercase tracking-[0.25em] text-gold">Aquila Imperii</div>
+              <h1 className="font-serif text-6xl font-bold leading-[0.9] text-foreground sm:text-7xl lg:text-8xl">
+                Welcome to
+                <span className="mt-2 block text-crimson">SPQR</span>
+              </h1>
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
+                Join Senatus Populusque Romanus, a living Roman roleplay community on Roblox. Find your place in the legions, government, civil organizations, or among the citizens of Rome.
+              </p>
+              <div className="mt-8">
+                <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
+                  <Users className="h-4 w-4 text-gold" /> Join the community
                 </div>
+                <SocialLinks variant="labeled" size="md" />
+              </div>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Button asChild variant="outline" size="lg" className="border-laurel rounded-md bg-transparent">
+                  <Link to="/government"><BookOpen /> Explore the archives</Link>
+                </Button>
+                <Button asChild variant="ghost" size="lg" className="text-crimson hover:bg-crimson/10 hover:text-crimson">
+                  <Link to="/development">See development <ArrowRight /></Link>
+                </Button>
               </div>
             </div>
 
-            <aside className="py-8 lg:col-span-3 lg:border-l lg:border-border lg:pl-8">
-              <div className="border-b-2 border-crimson pb-2 font-display text-xs uppercase text-gold">Access the state</div>
-              <h2 className="mt-5 font-serif text-4xl leading-none">All roads lead to Rome.</h2>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Enter the central register or inspect court records through the independent judicial authority.
-              </p>
-              <div className="mt-7 grid gap-3">
-                <Button asChild size="lg" className="justify-between rounded-none bg-crimson text-accent-foreground hover:bg-crimson-deep">
-                  <Link to="/government">Enter Mainframe <ArrowRight /></Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="justify-between rounded-none border-gold/50 bg-transparent text-gold hover:bg-gold/10 hover:text-gold">
-                  <Link to="/judicial"><Scale /> Judicial System</Link>
-                </Button>
+            <div className="relative flex min-h-[440px] items-center justify-center overflow-hidden border-t border-border bg-secondary lg:min-h-[620px] lg:border-l lg:border-t-0">
+              <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(45deg,hsl(var(--gold)/0.12)_25%,transparent_25%,transparent_75%,hsl(var(--gold)/0.12)_75%),linear-gradient(45deg,hsl(var(--gold)/0.12)_25%,transparent_25%,transparent_75%,hsl(var(--gold)/0.12)_75%)] [background-position:0_0,20px_20px] [background-size:40px_40px]" />
+              <div className="absolute inset-x-0 top-0 h-2 bg-gold" />
+              <img
+                src={logo}
+                alt="Senatus Populusque Romanus golden eagle crest"
+                className="relative z-10 w-[78%] max-w-md object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-[1.03]"
+              />
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-display text-[10px] uppercase tracking-[0.25em] text-gold-deep">Senatus · Populusque · Romanus</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 border-t border-border bg-background/50 md:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label} className="border-b border-r border-border p-5 text-center md:border-b-0 last:border-r-0">
+                <div className="font-serif text-3xl font-semibold text-foreground">{s.value}</div>
+                <div className="mt-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">{s.label}</div>
               </div>
-              <div className="mt-10 border-t border-border pt-6">
-                <div className="mb-3 text-[9px] uppercase tracking-[0.28em] text-muted-foreground">Join the Empire</div>
-                <SocialLinks variant="labeled" />
-              </div>
-            </aside>
+            ))}
           </div>
         </div>
       </section>
 
-      <RotatingQuotes />
-
       <section className="container py-16 md:py-24">
         <SectionHeader
-          eyebrow="The State Register"
-          title="Pillars of the Empire"
-          subtitle="Four living archives form the administrative record of Rome. Each is synchronized every sixty seconds."
+          eyebrow="Discover the Community"
+          title="Find your place in Rome"
+          subtitle="Explore the institutions, legions, organizations, and projects that make up the SPQR community."
         />
         <div className="grid border-y border-border sm:grid-cols-2 lg:grid-cols-4">
           {SECTIONS.map((s, i) => (
@@ -142,7 +118,7 @@ const Index = () => {
               key={s.title}
               to={s.href}
               style={{ animationDelay: `${i * 80}ms` }}
-              className="group relative min-h-[290px] border-b border-border p-6 transition-colors duration-300 hover:bg-card sm:border-r lg:border-b-0 last:border-r-0 animate-fade-up"
+              className="group relative min-h-[290px] border-b border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-panel sm:border-r lg:border-b-0 last:border-r-0 animate-fade-up"
             >
               <div className="flex items-start justify-between">
                 <div className="flex h-11 w-11 items-center justify-center border border-gold/40 text-gold transition group-hover:bg-crimson group-hover:text-accent-foreground">
@@ -161,6 +137,8 @@ const Index = () => {
           ))}
         </div>
       </section>
+
+      <RotatingQuotes />
 
 
       <section className="border-y border-border bg-card">
@@ -182,7 +160,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="flex min-h-52 items-center justify-center border-t border-border bg-crimson-deep/30 md:border-t-0">
+          <div className="flex min-h-52 items-center justify-center border-t border-border bg-secondary md:border-t-0">
             <div className="text-center">
               <Landmark className="mx-auto h-16 w-16 text-gold" />
               <div className="mt-4 font-display text-xs uppercase tracking-[0.25em] text-gold">Lex · Ordo · Iustitia</div>
