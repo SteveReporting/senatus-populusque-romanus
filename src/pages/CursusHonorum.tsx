@@ -67,7 +67,7 @@ export default function CursusHonorum() {
                   </div>
                 </div>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Link to={`/entity/info/${record.id}/${slugify(record.name)}`} className="inline-flex items-center gap-2 rounded-md border border-gold/35 px-3 py-2 text-sm font-semibold text-gold hover:bg-gold/10">Open full record</Link>
+                  <Link to={`/entity/government/${record.id}/${slugify(record.name)}`} className="inline-flex items-center gap-2 rounded-md border border-gold/35 px-3 py-2 text-sm font-semibold text-gold hover:bg-gold/10">Open full record</Link>
                   {branch && <a href={`https://trello.com/b/${TRELLO_CONFIG.informationBoardId}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm text-muted-foreground hover:text-foreground">Branch: {branch.name} <ExternalLink className="h-4 w-4" /></a>}
                   {record.url && <a href={record.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm text-muted-foreground hover:text-foreground">Trello card <ExternalLink className="h-4 w-4" /></a>}
                 </div>
