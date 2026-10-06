@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { CalendarDays, CircleHelp, Radio, Users } from "lucide-react";
 import { SOCIAL_LINKS } from "@/config/social";
-import { aucYear, festivalDate, festivalsOn, nextFestival, romanDate, toRoman } from "@/lib/romanCalendar";
+import { aucYear, festivalDate, festivalsOn, nextFestival, romanDate } from "@/lib/romanCalendar";
 
 const ROME_PLACE_ID = import.meta.env.VITE_ROBLOX_PLACE_ID || "97342994784241";
 const DISCORD_INVITE = SOCIAL_LINKS.discord.split("/").filter(Boolean).pop() || "";
@@ -69,7 +69,7 @@ export default function ImperialTicker() {
       <div className="mx-auto flex min-h-8 max-w-[1560px] items-center justify-between gap-4 px-[clamp(1rem,3vw,3rem)]">
         <div className="group relative flex min-w-0 items-center gap-2 py-1.5">
           <CalendarDays className="h-3.5 w-3.5 shrink-0 text-gold" />
-          <span className="truncate text-foreground/80">{romanDate(now)} · {toRoman(aucYear(now) % 10 || 10) && `${aucYear(now)} AUC`}</span>
+          <span className="truncate text-foreground/80">{romanDate(now)} · {aucYear(now)} AUC</span>
           <span className="hidden truncate rounded-full border border-gold/25 bg-gold/5 px-2 py-0.5 text-[9px] text-gold sm:inline">{status.today ? "Festival: " : ""}{status.label}</span>
           <CircleHelp className="hidden h-3 w-3 text-muted-foreground md:block" />
           <div className="pointer-events-none absolute left-0 top-full z-50 mt-2 hidden w-72 rounded-md border border-gold/20 bg-popover p-3 normal-case tracking-normal text-muted-foreground shadow-imperial group-hover:block">
