@@ -8,13 +8,13 @@ export default {
     container: {
       center: true,
       padding: "1.5rem",
-      screens: { "2xl": "1400px" },
+      screens: { "2xl": "1560px" },
     },
     extend: {
       fontFamily: {
-        serif: ["'Cormorant Garamond'", "Georgia", "serif"],
-        display: ["'Cinzel'", "'Cormorant Garamond'", "Georgia", "serif"],
-        sans: ["Karla", "system-ui", "sans-serif"],
+        serif: ["'Libre Baskerville'", "Georgia", "serif"],
+        display: ["'Cinzel'", "'Libre Baskerville'", "Georgia", "serif"],
+        sans: ["'IBM Plex Sans'", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -61,6 +61,8 @@ export default {
           DEFAULT: "hsl(var(--crimson))",
           deep: "hsl(var(--crimson-deep))",
         },
+        success: "hsl(var(--success))",
+        info: "hsl(var(--info))",
         surface: {
           1: "hsl(var(--surface-1))",
           2: "hsl(var(--surface-2))",

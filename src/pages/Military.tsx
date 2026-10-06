@@ -1,11 +1,12 @@
 import { useMemo } from "react";
-import { Shield } from "lucide-react";
+
 import SectionHeader from "@/components/SectionHeader";
 import EntityCard from "@/components/EntityCard";
 import TrelloEmptyState from "@/components/TrelloEmptyState";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG, LIST_CATEGORY_HINTS } from "@/config/trello";
 import { cardsByList, buildListImageFallbacks } from "@/lib/trello";
+import { UNIT_ARTWORK } from "@/lib/unitArtwork";
 
 const Military = () => {
   const { data, isLoading, error, refetch } = useTrelloBoard(TRELLO_CONFIG.informationBoardId);
@@ -25,7 +26,7 @@ const Military = () => {
       }));
   }, [data]);
 
-  const totalLegions = sections.reduce((acc, s) => acc + s.cards.length, 0);
+
 
   return (
     <div className="container py-16">
@@ -36,14 +37,21 @@ const Military = () => {
           title="Military Command"
           subtitle="Legions, auxilia, and command structure of the imperial armed forces."
         />
-        <div className="imperial-panel rounded-md px-5 py-4 flex items-center gap-4">
-          <Shield className="h-8 w-8 text-gold" />
-          <div>
-            <div className="font-display text-2xl text-gold">{totalLegions || "—"}</div>
-            <div className="text-[10px] tracking-widest uppercase text-muted-foreground">Active Units</div>
-          </div>
-        </div>
+
       </div>
+
+      <section aria-label="Unit standards" className="mb-16">
+        <h2 className="font-serif text-2xl text-gold mb-5">Unit standards</h2>
+        <div className="gold-divider mb-6" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
+          {UNIT_ARTWORK.map((unit) => (
+            <figure key={unit.name} className="min-w-0 text-center">
+              <img src={unit.src} alt={`${unit.name} standard`} loading="lazy" className="w-full aspect-square object-contain p-3" />
+              <figcaption className="mt-3 font-serif text-sm sm:text-base text-foreground leading-snug">{unit.name}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
 
       {isLoading && (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -74,7 +82,7 @@ const Military = () => {
             <div className="flex items-end justify-between mb-5">
               <h3 className="font-serif text-2xl text-gold">{list.name}</h3>
               <span className="text-xs tracking-widest uppercase text-muted-foreground">
-                {cards.length} unit{cards.length !== 1 && "s"}
+                {cards.length} record{cards.length !== 1 && "s"}
               </span>
             </div>
             <div className="gold-divider mb-6" />

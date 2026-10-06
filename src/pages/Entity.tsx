@@ -1,13 +1,14 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useTrelloBoard } from "@/hooks/useTrelloBoard";
 import { TRELLO_CONFIG } from "@/config/trello";
-import { extractLinks, getCardImage } from "@/lib/trello";
+import { extractLinks, getAttachmentImage, getCardImage, type TrelloAttachment } from "@/lib/trello";
 import pattern from "@/assets/roman-pattern.jpg";
 import crest from "@/assets/sjc-logo.png";
+import { getUnitArtwork } from "@/lib/unitArtwork";
 
 function toRoman(num: number): string {
   if (num <= 0) return "";
@@ -84,6 +85,51 @@ const PlaceholderSeal = ({ name }: { name: string }) => {
   );
 };
 
+function tidyMarkdown(source: string): string {
+  const normalized = source.replace(/\r\n?/g, "\n").trim();
+  return normalized
+    // Trello descriptions often put several bold role names into one giant paragraph.
+    // Give each role its own readable paragraph without changing the source data.
+    .replace(/([.!?])\s+(?=\*\*[^*\n]{2,100}\*\*\s*(?:[–—-]|:))/g, "$1\n\n")
+    .replace(/\n{3,}/g, "\n\n");
+}
+
+const EntityHeroMedia = ({ src, name, isUnit = false }: { src: string | null; name: string; isUnit?: boolean }) => {
+  const [failed, setFailed] = useState(false);
+  if (!src || failed) return <PlaceholderSeal name={name} />;
+  return (
+    <img
+      src={src}
+      alt={name}
+      referrerPolicy="no-referrer"
+      onError={() => setFailed(true)}
+      className={`absolute inset-0 h-full w-full ${isUnit ? "object-contain p-6" : "object-cover"}`}
+    />
+  );
+};
+
+const AttachmentMedia = ({ attachment }: { attachment: TrelloAttachment }) => {
+  const [failed, setFailed] = useState(false);
+  const src = getAttachmentImage(attachment);
+  if (!src || failed) {
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-surface-2 p-2 text-center text-[10px] leading-snug text-muted-foreground">
+        {attachment.name}
+      </div>
+    );
+  }
+  return (
+    <img
+      src={src}
+      alt={attachment.name}
+      loading="lazy"
+      referrerPolicy="no-referrer"
+      onError={() => setFailed(true)}
+      className="h-full w-full object-cover"
+    />
+  );
+};
+
 const Entity = () => {
   const { category, id } = useParams();
   const { data, isLoading } = useTrelloBoard(TRELLO_CONFIG.informationBoardId);
@@ -117,9 +163,11 @@ const Entity = () => {
     );
   }
 
-  const img = getCardImage(card);
-  const links = extractLinks(card.desc || "");
-  const desc = card.desc || "";
+  const unitArtwork = getUnitArtwork(card.name);
+  const img = unitArtwork?.src ?? getCardImage(card);
+  const rawDesc = card.desc || "";
+  const links = extractLinks(rawDesc);
+  const desc = tidyMarkdown(rawDesc);
 
   return (
     <div className="container py-12">
@@ -130,21 +178,13 @@ const Entity = () => {
       <div className="grid lg:grid-cols-[1fr_2fr] gap-10">
         <div>
           <div className="imperial-panel rounded-lg overflow-hidden aspect-square bg-surface-2 relative">
-            {img ? (
-              <img src={img} alt={card.name} className="absolute inset-0 w-full h-full object-cover" />
-            ) : (
-              <PlaceholderSeal name={card.name} />
-            )}
+            <EntityHeroMedia key={card.id} src={img} name={card.name} isUnit={Boolean(unitArtwork)} />
           </div>
           {card.attachments && card.attachments.length > 1 && (
             <div className="mt-4 grid grid-cols-4 gap-2">
               {card.attachments.slice(0, 8).map((a) => (
                 <a key={a.id} href={a.url} target="_blank" rel="noreferrer" className="aspect-square overflow-hidden rounded border border-border hover:border-gold/50">
-                  {a.previewUrl || /\.(png|jpe?g|webp|gif|svg)$/i.test(a.url) ? (
-                    <img src={a.previewUrl || a.url} alt={a.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="flex items-center justify-center w-full h-full text-[10px] text-muted-foreground p-1 text-center">{a.name}</div>
-                  )}
+                  <AttachmentMedia attachment={a} />
                 </a>
               ))}
             </div>
@@ -161,21 +201,7 @@ const Entity = () => {
           <div className="gold-divider my-6" />
 
           {desc ? (
-            <div className="max-w-none text-muted-foreground leading-relaxed space-y-4
-              [&_h1]:font-serif [&_h1]:text-3xl [&_h1]:text-foreground [&_h1]:mt-6
-              [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-foreground [&_h2]:mt-6
-              [&_h3]:font-serif [&_h3]:text-xl [&_h3]:text-foreground [&_h3]:mt-4
-              [&_h4]:font-display [&_h4]:tracking-widest [&_h4]:uppercase [&_h4]:text-gold [&_h4]:text-sm [&_h4]:mt-4
-              [&_strong]:text-foreground [&_strong]:font-semibold
-              [&_em]:italic
-              [&_a]:text-gold [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-gold-soft
-              [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-1
-              [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-1
-              [&_blockquote]:border-l-2 [&_blockquote]:border-gold/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-foreground/80
-              [&_code]:bg-surface-2 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-gold-soft [&_code]:text-sm
-              [&_pre]:bg-surface-2 [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:overflow-x-auto
-              [&_hr]:border-gold/20 [&_hr]:my-6
-              [&_table]:w-full [&_th]:text-left [&_th]:text-foreground [&_th]:border-b [&_th]:border-border [&_th]:py-2 [&_td]:py-2 [&_td]:border-b [&_td]:border-border/50">
+            <div className="entity-markdown max-w-[82ch]">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{

@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import AmbientAudioDock from "./AmbientAudioDock";
 
 export const Layout = () => (
   <div className="min-h-screen flex flex-col">
@@ -9,6 +10,7 @@ export const Layout = () => (
       <Outlet />
     </main>
     <Footer />
+    <AmbientAudioDock />
   </div>
 );
 

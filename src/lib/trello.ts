@@ -35,6 +35,40 @@ export interface TrelloCard {
   cover?: TrelloCardCover | null;
   url?: string;
   labels?: { id: string; name: string; color: string }[];
+  dateLastActivity?: string;
+  due?: string | null;
+  idMembers?: string[];
+  idChecklists?: string[];
+}
+
+export interface TrelloChecklist {
+  id: string;
+  idCard: string;
+  name: string;
+  pos: number;
+  checkItems: { id: string; name: string; state: "complete" | "incomplete"; pos: number }[];
+}
+
+export interface TrelloAction {
+  id: string;
+  type: string;
+  date: string;
+  data: {
+    card?: { id: string; name: string };
+    list?: { id: string; name: string };
+    listAfter?: { id: string; name: string };
+    listBefore?: { id: string; name: string };
+    attachment?: { name?: string };
+    checklist?: { name?: string };
+    old?: Record<string, unknown>;
+  };
+}
+
+export interface TrelloMember {
+  id: string;
+  fullName?: string;
+  username?: string;
+  avatarUrl?: string | null;
 }
 
 export interface TrelloList {
@@ -50,6 +84,10 @@ export interface TrelloBoard {
   desc?: string;
   lists: TrelloList[];
   cards: TrelloCard[];
+  checklists?: TrelloChecklist[];
+  actions?: TrelloAction[];
+  members?: TrelloMember[];
+  dateLastActivity?: string;
 }
 
 const PUBLIC_JSON = (boardId: string) =>
@@ -70,48 +108,72 @@ export async function fetchPublicBoard(boardId: string): Promise<TrelloBoard> {
     desc: data.desc,
     lists: (data.lists ?? []).filter((l: TrelloList) => !l.closed),
     cards: (data.cards ?? []).filter((c: TrelloCard) => !c.closed),
+    checklists: data.checklists ?? [],
+    actions: data.actions ?? [],
+    members: data.members ?? [],
+    dateLastActivity: data.dateLastActivity,
   };
 }
 
-// Pick the largest reasonable preview URL (~600px) from a previews array.
+// Normalize external image URLs before handing them to the browser.
+function cleanImageUrl(url?: string | null): string | null {
+  if (!url) return null;
+  const value = url.trim();
+  if (!value) return null;
+  if (value.startsWith("//")) return `https:${value}`;
+  if (value.startsWith("http://")) return `https://${value.slice(7)}`;
+  return value;
+}
+
+// Pick the largest sensible public preview from Trello.
 function pickPreview(previews?: TrelloAttachmentPreview[]): string | null {
   if (!previews || previews.length === 0) return null;
   const sorted = [...previews].sort((a, b) => (b.width ?? 0) - (a.width ?? 0));
-  // prefer something between 400-1200 wide; fall back to largest
-  const ideal = sorted.find((p) => p.width >= 400 && p.width <= 1200);
-  return (ideal ?? sorted[0]).url;
+  const ideal = sorted.find((p) => p.width >= 400 && p.width <= 1600);
+  return cleanImageUrl((ideal ?? sorted[0]).url);
+}
+
+export function isImageAttachment(attachment: TrelloAttachment): boolean {
+  return Boolean(
+    (attachment.previews && attachment.previews.length > 0) ||
+    attachment.previewUrl ||
+    attachment.mimeType?.startsWith("image/") ||
+    /\.(png|jpe?g|webp|gif|svg)(?:\?|$)/i.test(attachment.url || "")
+  );
+}
+
+export function getAttachmentImage(attachment: TrelloAttachment): string | null {
+  const preview = pickPreview(attachment.previews);
+  if (preview) return preview;
+
+  const explicitPreview = cleanImageUrl(attachment.previewUrl);
+  if (explicitPreview) return explicitPreview;
+
+  if (isImageAttachment(attachment)) return cleanImageUrl(attachment.url);
+  return null;
 }
 
 export function getCardImage(card: TrelloCard): string | null {
-  // 1. Modern Trello "cover" field with public scaled previews
   const coverPreview = pickPreview(card.cover?.scaled);
   if (coverPreview) return coverPreview;
 
   if (!card.attachments || card.attachments.length === 0) return null;
 
-  // 2. Resolve the cover attachment, if any
   const cover =
     card.idAttachmentCover &&
     card.attachments.find((a) => a.id === card.idAttachmentCover);
 
-  // 3. Otherwise, first image-looking attachment
-  const candidate =
-    cover ??
-    card.attachments.find(
-      (a) =>
-        (a.previews && a.previews.length > 0) ||
-        a.previewUrl ||
-        (a.mimeType?.startsWith("image/") ?? false) ||
-        /\.(png|jpe?g|webp|gif|svg)$/i.test(a.url)
-    );
+  if (cover) {
+    const coverImage = getAttachmentImage(cover);
+    if (coverImage) return coverImage;
+  }
 
-  if (!candidate) return null;
-  return (
-    pickPreview(candidate.previews) ||
-    candidate.previewUrl ||
-    candidate.url ||
-    null
-  );
+  for (const attachment of card.attachments) {
+    const image = getAttachmentImage(attachment);
+    if (image) return image;
+  }
+
+  return null;
 }
 
 // Build a map: listId -> fallback image URL, taken from the first card in that

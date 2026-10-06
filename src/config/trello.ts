@@ -14,7 +14,7 @@ export const TRELLO_CONFIG = {
   refreshIntervalMs: 60_000,
 };
 
-export const JUDICIAL_URL = "https://example.com/judicial"; // Replace with the real judicial database URL.
+export const JUDICIAL_URL = "https://judicial-database.pages.dev/";
 
 // Heuristics for grouping lists across the information board.
 // Lowercased substring match against list names.
