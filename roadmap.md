@@ -1,9 +1,9 @@
 # Roadmap
 
 - [ ] Remove repetitive record thumbnails without changing the homepage artwork.
-- [ ] Build the career tree with official requirements and matching branch links.
-- [ ] Build a searchable jurisdiction-based law codex with source-backed court citations.
-- [ ] Correct Roman date counting and show historically dated festivals in the ticker.
+- [x] Build the career tree with official requirements and matching branch links.
+- [x] Build a searchable jurisdiction-based law codex with source-backed court citations.
+- [x] Correct Roman date counting and show historically dated festivals in the ticker.
 
 - [x] Add uploaded unit logos to Military Command and matching unit cards/detail pages; keep the homepage and shared layout unchanged.
 
